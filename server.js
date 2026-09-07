@@ -18,6 +18,11 @@ io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
   // মেসেজ পাঠানো
+  socket.on('user-login', (data) => {
+        console.log('User logged in via Firebase:', data.phoneNumber);
+        socket.phoneNumber = data.phoneNumber;
+        socket.userId = data.uid;
+    });
   socket.on("chatMessage", (msg) => {
     io.emit("chatMessage", msg);
   });
